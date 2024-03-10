@@ -74,11 +74,13 @@ transitions = {
     },
 
     "identifier_start": {
+        "alpha": "identifier_continue",
         "alnum": "identifier_continue",
         "other": "invalid_input"
     },
 
     "identifier_continue": {
+        "alpha": "identifier_continue",
         "alnum": "identifier_continue",
         "other": "invalid_input"
     },
@@ -96,20 +98,47 @@ transitions = {
     "invalid_input": {
         "all": "invalid"
     }
+
 }
 
 #lexer function
 def lexer():
 
+    #setting state at beginning
+    state = current_state
+
     #inputs would go here (future file inputs to test inputs would also go here)
     #potentially make a separate function that would return into the lexer specifically
-    test = 'hello'
 
-    
+    #test cases
+    #test = 'hello' #should complete, print alphas
+    #test = '_123' #should fail, cannot have underscore to start
+    #test = 123 #should complete, print integers
+
+    #convert to string if integer input is found
+    test = str(test)
+
     #split the inputs into characters to be put into the lexer function
     for index in range (len(test)):
-        print (test[index])
 
+        #inputs being put in one by one into input char
+        input_char = test[index]
+
+        #get the specific type to compare with the transition table
+        input_type = get_input_type(input_char)
+
+        #find where the next state is after transition 
+        next_state_location = next_state(state, input_char)
+        state = next_state_location
+        #print (f'aaa: {state}')
+        print ("next_state:", next_state_location)
+
+        #print (test[index])
+
+    if ('identifier_continue' in state or 'integer_continue' in state):
+        print ('complete')
+    else:
+        print ('invalid token')
     return 0
 
 #find next transition state using dictionary and in puts
@@ -118,10 +147,10 @@ def next_state(current_state, input_char):
     print ("Input type:", input_type)
 
     next_state_dictionary = transitions.get (current_state, {})
-    print ("Next state dictionary", next_state_dictionary)
+    #print ("Next state dictionary", next_state_dictionary)
 
     next_state = next_state_dictionary.get(input_type, "invalid")
-    print ("Next state:", next_state)
+    #print ("Next state:", next_state)
 
     return next_state
 
@@ -139,12 +168,17 @@ def get_input_type(input_char):
     else:
         return "other"
 
+#setting state at beginning
 current_state = "current_state"
+
+#inputs being put in one by one into input char
 input_char = "52"
 
-input_type = get_input_type(input_char)
+#get the specific type to compare with the transition table
+#input_type = get_input_type(input_char)
 #print ("Input type", input_type)
 
-next_state = next_state(current_state, input_char)
-print ("next_state:", next_state)
-#lexer()
+#find where the next state is after transition 
+#next_state = next_state(current_state, input_char)
+#print ("next_state:", next_state)
+lexer()
