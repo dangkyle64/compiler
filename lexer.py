@@ -22,6 +22,11 @@ class lexical:
             #inputs being put in one by one into input char
             input_char = test[index]
 
+            #testing for starting underscore that makes identifiers invalid
+            if (test[0] == '_'):
+                print (f'invalid token: ERROR, Lexume: {test}')
+                return 0
+            
             #get the specific type to compare with the transition table
             input_type = self.get_input_type(input_char)
 
@@ -33,6 +38,7 @@ class lexical:
 
             #print (test[index])
 
+        #when finishing moving through input and states, print results
         if ('identifier_continue' in state):
             print (f'Accepted State: ')
             print (f'Token: identifier, Lexume: {test}')
@@ -42,7 +48,7 @@ class lexical:
             print (f'Token: integer, Lexume: {test}')     
 
         else:
-            print ('invalid token')
+            print (f'Token: ERROR, Lexume: {test}')
 
         return 0
 
