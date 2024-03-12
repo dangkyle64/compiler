@@ -113,7 +113,7 @@ def lexer():
     #test cases
     #test = 'hello' #should complete, print alphas
     #test = '_123' #should fail, cannot have underscore to start
-    #test = 123 #should complete, print integers
+    test = 123 #should complete, print integers
 
     #convert to string if integer input is found
     test = str(test)
