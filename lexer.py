@@ -39,17 +39,17 @@ def lexer():
 
     #setting state at beginning
     state = 'current_state'
-
-    #inputs would go here (future file inputs to test inputs would also go here)
+    stored_tests = []
     #potentially make a separate function that would return into the lexer specifically
 
-    #test cases
-    #test = 'hello' #should complete, print alphas
-    #test = '_123' #should fail, cannot have underscore to start
-    test = 123 #should complete, print integers
-    #test = 'hello123'
-    #test = 'hello_world' #need to check this
+    test = 'hello_world' 
 
+    #file with testcases
+
+    with open ('input_scode.txt', 'r') as file:
+        file_content = file.readlines()
+        print (file_content)
+    
     #convert to string if integer input is found
     test = str(test)
 
@@ -71,9 +71,11 @@ def lexer():
         #print (test[index])
 
     if ('identifier_continue' in state):
+        print (f'Accepted State: ')
         print (f'Token: identifier, Lexume: {test}')
 
     elif ('integer_continue' in state):
+        print (f'Accepted State: ')
         print (f'Token: integer, Lexume: {test}')     
 
     else:
@@ -96,7 +98,7 @@ def next_state(current_state, input_char):
 
 #find the type of input to get proper comparisons in dictionary
 def get_input_type(input_char):
-    if input_char.isalpha():
+    if input_char.isalpha() or input_char == '_':
         return "alpha"
     
     if input_char.isdigit():
