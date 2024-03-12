@@ -81,7 +81,7 @@ transitions = {
 
     "identifier_continue": {
         "alpha": "identifier_continue",
-        "alnum": "identifier_continue",
+        "digit": "identifier_continue",
         "other": "invalid_input"
     },
 
@@ -114,6 +114,8 @@ def lexer():
     #test = 'hello' #should complete, print alphas
     #test = '_123' #should fail, cannot have underscore to start
     test = 123 #should complete, print integers
+    #test = 'hello123'
+    #test = 'hello_world' #need to check this
 
     #convert to string if integer input is found
     test = str(test)
@@ -135,11 +137,18 @@ def lexer():
 
         #print (test[index])
 
-    if ('identifier_continue' in state or 'integer_continue' in state):
-        print ('complete')
+    if ('identifier_continue' in state):
+        print (f'Token: identifier, Lexume: {test}')
+
+    elif ('integer_continue' in state):
+        print (f'Token: integer, Lexume: {test}')     
+
     else:
         print ('invalid token')
+
     return 0
+
+
 
 #find next transition state using dictionary and in puts
 def next_state(current_state, input_char):
