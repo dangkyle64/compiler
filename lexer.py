@@ -1,113 +1,111 @@
-#create dictionary to define the different transitions 
-transitions = {
-    "current_state": {
-        "alpha": "identifier_start",
-        "digit": "integer_start",
-        "other": "invalid_input"
-    },
 
-    "identifier_start": {
-        "alpha": "identifier_continue",
-        "alnum": "identifier_continue",
-        "other": "invalid_input"
-    },
-
-    "identifier_continue": {
-        "alpha": "identifier_continue",
-        "digit": "identifier_continue",
-        "other": "invalid_input"
-    },
-
-    "integer_start": {
-        "digit": "integer_continue",
-        "other": "invalid_input"
-    },
-
-    "integer_continue": {
-        "digit": "integer_continue",
-        "other": "invalid_input"
-    },
-
-    "invalid_input": {
-        "all": "invalid"
-    }
-
-}
-
-#lexer function
-def lexer():
-
-    #setting state at beginning
-    state = 'current_state'
-    stored_tests = []
-    #potentially make a separate function that would return into the lexer specifically
-
-    test = 'hello_world' 
-
-    #file with testcases
-
-    with open ('input_scode.txt', 'r') as file:
-        file_content = file.readlines()
-        print (file_content)
+class lexical:
     
-    #convert to string if integer input is found
-    test = str(test)
+    def __init__ (self):
+        self.value = 0
 
-    #split the inputs into characters to be put into the lexer function
-    for index in range (len(test)):
+    #lexer function
+    def lexer(self, input):
 
-        #inputs being put in one by one into input char
-        input_char = test[index]
+        #setting state at beginning
+        state = 'current_state'
 
-        #get the specific type to compare with the transition table
-        input_type = get_input_type(input_char)
+        #test = 'hello_world' 
+        test = input 
 
-        #find where the next state is after transition 
-        next_state_location = next_state(state, input_char)
-        state = next_state_location
-        #print (f'aaa: {state}')
-        print ("next_state:", next_state_location)
+        #convert to string if integer input is found
+        test = str(test)
 
-        #print (test[index])
+        #split the inputs into characters to be put into the lexer function
+        for index in range (len(test)):
 
-    if ('identifier_continue' in state):
-        print (f'Accepted State: ')
-        print (f'Token: identifier, Lexume: {test}')
+            #inputs being put in one by one into input char
+            input_char = test[index]
 
-    elif ('integer_continue' in state):
-        print (f'Accepted State: ')
-        print (f'Token: integer, Lexume: {test}')     
+            #get the specific type to compare with the transition table
+            input_type = self.get_input_type(input_char)
 
-    else:
-        print ('invalid token')
+            #find where the next state is after transition 
+            next_state_location = self.next_state(state, input_char)
+            state = next_state_location
+            #print (f'aaa: {state}')
+            #print ("next_state:", next_state_location)
 
-    return 0
+            #print (test[index])
 
-#find next transition state using dictionary and in puts
-def next_state(current_state, input_char):
-    input_type = get_input_type(input_char)
-    print ("Input type:", input_type)
+        if ('identifier_continue' in state):
+            print (f'Accepted State: ')
+            print (f'Token: identifier, Lexume: {test}')
 
-    next_state_dictionary = transitions.get (current_state, {})
-    #print ("Next state dictionary", next_state_dictionary)
+        elif ('integer_continue' in state):
+            print (f'Accepted State: ')
+            print (f'Token: integer, Lexume: {test}')     
 
-    next_state = next_state_dictionary.get(input_type, "invalid")
-    #print ("Next state:", next_state)
+        else:
+            print ('invalid token')
 
-    return next_state
+        return 0
 
-#find the type of input to get proper comparisons in dictionary
-def get_input_type(input_char):
-    if input_char.isalpha() or input_char == '_':
-        return "alpha"
-    
-    if input_char.isdigit():
-        return "digit"
-    
-    if input_char.isalnum():
-        return "alnum"
-    
-    else:
-        return "other"
+    #find next transition state using dictionary and in puts
+    def next_state(self, current_state, input_char):
 
-lexer()
+        #create dictionary to define the different transitions 
+        transitions = {
+            "current_state": {
+                "alpha": "identifier_start",
+                "digit": "integer_start",
+                "other": "invalid_input"
+            },
+
+            "identifier_start": {
+                "alpha": "identifier_continue",
+                "alnum": "identifier_continue",
+                "other": "invalid_input"
+            },
+
+            "identifier_continue": {
+                "alpha": "identifier_continue",
+                "digit": "identifier_continue",
+                "other": "invalid_input"
+            },
+
+            "integer_start": {
+                "digit": "integer_continue",
+                "other": "invalid_input"
+            },
+
+            "integer_continue": {
+                "digit": "integer_continue",
+                "other": "invalid_input"
+            },
+
+            "invalid_input": {
+                "all": "invalid"
+            }
+
+        }
+
+        input_type = self.get_input_type(input_char)
+        #print ("Input type:", input_type)
+
+        next_state_dictionary = transitions.get (current_state, {})
+        #print ("Next state dictionary", next_state_dictionary)
+
+        next_state = next_state_dictionary.get(input_type, "invalid")
+        #print ("Next state:", next_state)
+
+        return next_state
+
+    #find the type of input to get proper comparisons in dictionary
+    def get_input_type(self, input_char):
+        if input_char.isalpha() or input_char == '_':
+            return "alpha"
+        
+        if input_char.isdigit():
+            return "digit"
+        
+        if input_char.isalnum():
+            return "alnum"
+        
+        else:
+            return "other"
