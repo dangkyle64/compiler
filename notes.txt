@@ -1,8 +1,8 @@
 def lexer()
-    returns token, token_value = instance of token (lexeme)
+    returns token, token_value = instance of token (lexeme) X
 
-implement FSA for tokens
-    identifier and integers, others can be written extra
+implement FSA for tokens 
+    identifier and integers, others can be written extra X
 
 write REs
 draw FSA for above required tokens (identifier and integer)

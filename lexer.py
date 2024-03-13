@@ -39,13 +39,21 @@ class lexical:
             #print (test[index])
 
         #when finishing moving through input and states, print results
-        if ('identifier_continue' in state):
-            print (f'Accepted State: ')
-            print (f'Token: identifier, Lexume: {test}')
+        if ('identifier_continue' in state or 'identifier_start' in state):
+            print (f'Accepted State -> Token: identifier, Lexume: {test}')
 
         elif ('integer_continue' in state):
-            print (f'Accepted State: ')
-            print (f'Token: integer, Lexume: {test}')     
+            print (f'Accepted State -> Token: integer, Lexume: {test}')     
+
+        elif ('operator' in state):
+            print (f'Accepted State -> Token: operator, Lexume: {test}')
+
+        elif ('separator' in state):
+
+            print (f'Accepted State -> Token: separator, Lexume: {test}')
+
+        elif ('real_continue' in state):
+            print (f'Accepted State -> Token: real, Lexume: {test}')
 
         else:
             print (f'Token: ERROR, Lexume: {test}')
@@ -60,12 +68,13 @@ class lexical:
             "current_state": {
                 "alpha": "identifier_start",
                 "digit": "integer_start",
+                "operator": "operator_start",
+                "separator": "separator_start",
                 "other": "invalid_input"
             },
 
             "identifier_start": {
                 "alpha": "identifier_continue",
-                "alnum": "identifier_continue",
                 "other": "invalid_input"
             },
 
@@ -82,7 +91,28 @@ class lexical:
 
             "integer_continue": {
                 "digit": "integer_continue",
+                "decimal": "real_start",
                 "other": "invalid_input"
+            },
+
+            "operator_start":  {
+                "all": "operator"
+            },
+
+            "separator_start": {
+                "all": "separator"
+            },
+
+            "real_start": {
+                "digit": "real_continue",
+                "other": "invalid_input"
+            },
+
+            "real_continue": {
+                "digit" : "real_continue",
+                ".": "invalid_input",
+                "other" : "invalid_input"
+
             },
 
             "invalid_input": {
@@ -104,14 +134,31 @@ class lexical:
 
     #find the type of input to get proper comparisons in dictionary
     def get_input_type(self, input_char):
+        special_char_dict = {
+            "=": "operator",
+            "+": "operator",
+            "-": "operator",
+            "*": "operator",
+            "/": "operator",
+            "<": "operator",
+            ">": "operator",
+            ";": "separator",
+            "(": "separator",
+            ")": "separator",
+        }
+        
         if input_char.isalpha() or input_char == '_':
             return "alpha"
         
         if input_char.isdigit():
             return "digit"
         
-        if input_char.isalnum():
-            return "alnum"
+        if input_char in special_char_dict:
+            #print(f'aaaaaaa  {special_char_dict[input_char]}')
+            return special_char_dict[input_char]
+        
+        if input_char == '.':
+            return "decimal"
         
         else:
             return "other"

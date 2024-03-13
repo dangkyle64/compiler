@@ -1,5 +1,10 @@
-123
-hello123
-hello_world
-_helloworld
-123hello
+while 
+(
+t 
+< 
+upper 
+) 
+s
+= 
+22.00
+;
