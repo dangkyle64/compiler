@@ -145,6 +145,7 @@ class lexical:
             ";": "separator",
             "(": "separator",
             ")": "separator",
+            '"': "separator",
         }
         
         if input_char.isalpha() or input_char == '_':

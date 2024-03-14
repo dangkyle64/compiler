@@ -1,10 +1,2 @@
-while 
-(
-t 
-< 
-upper 
-) 
-s
-= 
-22.00
-;
+while ( t < upper ) s = 22.00 ;
+jackfruit = " delicious "
