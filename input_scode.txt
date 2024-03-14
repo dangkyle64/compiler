@@ -1,2 +1,4 @@
-while ( t < upper ) s = 22.00 ;
-jackfruit = " delicious "
+while ( t < upper ) s = 22.00 ; 
+jackfruit = " delicious " 
+int = 10 
+class Jake : 

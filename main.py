@@ -9,12 +9,12 @@ def main():
     with open ('input_scode.txt', 'r') as file:
         for line in file:
             inputs_array = line.split(" ")
-            inputs.append(inputs_array)
+            inputs.extend(inputs_array)
         #file_data = [line.strip() for line in file.readlines()]
         #print(file_data)
 
     #loop through all testcases in lexical analyzer
-    for input in inputs_array:
+    for input in inputs:
         lexical_analyzer.lexer(input)
 
     return 0

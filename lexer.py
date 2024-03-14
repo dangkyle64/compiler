@@ -6,7 +6,11 @@ class lexical:
 
     #lexer function
     def lexer(self, input):
-
+        keyword = {
+            "while" : "keyword",
+            "class" : "keyword"
+            
+        }
         #setting state at beginning
         state = 'current_state'
 
@@ -39,7 +43,11 @@ class lexical:
             #print (test[index])
 
         #when finishing moving through input and states, print results
-        if ('identifier_continue' in state or 'identifier_start' in state):
+            
+        if ('identifier_continue' in state and test in keyword):
+            print (f'Accepted State -> Token: keyword, Lexume {test}')
+            
+        elif ('identifier_continue' in state or 'identifier_start' in state):
             print (f'Accepted State -> Token: identifier, Lexume: {test}')
 
         elif ('integer_continue' in state):
@@ -134,6 +142,7 @@ class lexical:
 
     #find the type of input to get proper comparisons in dictionary
     def get_input_type(self, input_char):
+
         special_char_dict = {
             "=": "operator",
             "+": "operator",
@@ -146,8 +155,9 @@ class lexical:
             "(": "separator",
             ")": "separator",
             '"': "separator",
+            ":": "separator"
         }
-        
+
         if input_char.isalpha() or input_char == '_':
             return "alpha"
         
