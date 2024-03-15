@@ -31,12 +31,17 @@ class lexical:
                 print (f'invalid token: ERROR, Lexume: {test}')
                 return 0
             
+            if input_char == ' ' and state == 'separator':
+                continue
+
             #get the specific type to compare with the transition table
             input_type = self.get_input_type(input_char)
 
             #find where the next state is after transition 
             next_state_location = self.next_state(state, input_char)
-            state = next_state_location
+
+            if input_char != ' ' or state != 'separator':
+                state = next_state_location
             #print (f'aaa: {state}')
             #print ("next_state:", next_state_location)
 
@@ -63,6 +68,9 @@ class lexical:
         elif ('real_continue' in state):
             print (f'Accepted State -> Token: real, Lexume: {test}')
 
+        elif ('space_start' in state):
+            return 0
+        
         else:
             print (f'Token: ERROR, Lexume: {test}')
 
@@ -78,6 +86,7 @@ class lexical:
                 "digit": "integer_start",
                 "operator": "operator_start",
                 "separator": "separator_start",
+                "space": "space_start",
                 "other": "invalid_input"
             },
 
@@ -123,6 +132,10 @@ class lexical:
 
             },
 
+            "space_start": {
+                "all": "space_start"
+            },
+
             "invalid_input": {
                 "all": "invalid"
             }
@@ -152,6 +165,7 @@ class lexical:
             "<": "operator",
             ">": "operator",
             ";": "separator",
+            " ": "space",
             "(": "separator",
             ")": "separator",
             '"': "separator",
@@ -167,6 +181,9 @@ class lexical:
         if input_char in special_char_dict:
             #print(f'aaaaaaa  {special_char_dict[input_char]}')
             return special_char_dict[input_char]
+        
+        if input_char == ' ':
+            return "space"
         
         if input_char == '.':
             return "decimal"
