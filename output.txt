@@ -1,0 +1,11 @@
+Tokens, Lexume
+keyword, while
+separator, (
+identifier, t
+operator, <
+identifier, upper
+separator, )
+identifier, s
+operator, =
+real, 22.00
+separator, ;

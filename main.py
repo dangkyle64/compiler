@@ -15,9 +15,14 @@ def main():
         #print(file_data)
 
     #loop through all testcases in lexical analyzer
-    for input in inputs:
-        token_output = lexical_analyzer.lexer(input)
-        print (f'{token_output.type}, {token_output.lexume}')
+    with open ('output.txt', 'w') as file:
+        file.write(f'Tokens, Lexume\n')
+        for input in inputs:
+            token_output = lexical_analyzer.lexer(input)
+            #print (f'{token_output.type}, {token_output.lexume}')
+            file.write(f'{token_output.type}, {token_output.lexume}\n')
+
+        
 
     return 0
 
