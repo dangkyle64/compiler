@@ -1,4 +1,5 @@
 from lexer import lexical
+from lexer import Token
 
 def main():
 
@@ -15,7 +16,8 @@ def main():
 
     #loop through all testcases in lexical analyzer
     for input in inputs:
-        lexical_analyzer.lexer(input)
+        token_output = lexical_analyzer.lexer(input)
+        print (f'{token_output.type}, {token_output.lexume}')
 
     return 0
 

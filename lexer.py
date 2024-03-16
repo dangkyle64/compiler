@@ -1,3 +1,7 @@
+class Token:
+    def __init__(self, token_type, lexume):
+        self.type = token_type
+        self.lexume = lexume
 
 class lexical:
     
@@ -50,29 +54,29 @@ class lexical:
         #when finishing moving through input and states, print results
             
         if ('identifier_continue' in state and test in keyword):
-            print (f'Accepted State -> Token: keyword, Lexume {test}')
+            return Token('keyword', test)
             
         elif ('identifier_continue' in state or 'identifier_start' in state):
-            print (f'Accepted State -> Token: identifier, Lexume: {test}')
+            return Token('identifier', test)
 
         elif ('integer_continue' in state):
-            print (f'Accepted State -> Token: integer, Lexume: {test}')     
+            return Token('integer', test)     
 
         elif ('operator' in state):
-            print (f'Accepted State -> Token: operator, Lexume: {test}')
+            return Token('operator', test)
 
         elif ('separator' in state):
 
-            print (f'Accepted State -> Token: separator, Lexume: {test}')
+            return Token('separator', test)
 
         elif ('real_continue' in state):
-            print (f'Accepted State -> Token: real, Lexume: {test}')
+            return Token('real', test)
 
         elif ('space_start' in state):
             return 0
         
         else:
-            print (f'Token: ERROR, Lexume: {test}')
+            return Token('ERROR', test)
 
         return 0
 
