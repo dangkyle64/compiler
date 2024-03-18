@@ -11,8 +11,10 @@ class lexical:
     #lexer function
     def lexer(self, input):
         keyword = {
-            "while" : "keyword",
-            "class" : "keyword"
+            'while' : 'keyword',
+            'class' : 'keyword',
+            'for'  : 'keyword',
+            'self' : 'keyword'
             
         }
         #setting state at beginning
@@ -47,7 +49,7 @@ class lexical:
             if input_char != ' ' or state != 'separator':
                 state = next_state_location
             #print (f'aaa: {state}')
-            #print ("next_state:", next_state_location)
+            #print ('next_state:', next_state_location)
 
             #print (test[index])
 
@@ -73,7 +75,7 @@ class lexical:
             return Token('real', test)
 
         elif ('space_start' in state):
-            return 0
+            return Token('space', test)
         
         else:
             return Token('ERROR', test)
@@ -85,75 +87,75 @@ class lexical:
 
         #create dictionary to define the different transitions 
         transitions = {
-            "current_state": {
-                "alpha": "identifier_start",
-                "digit": "integer_start",
-                "operator": "operator_start",
-                "separator": "separator_start",
-                "space": "space_start",
-                "other": "invalid_input"
+            'current_state': {
+                'alpha': 'identifier_start',
+                'digit': 'integer_start',
+                'operator': 'operator_start',
+                'separator': 'separator_start',
+                'space': 'space_start',
+                'other': 'invalid_input'
             },
 
-            "identifier_start": {
-                "alpha": "identifier_continue",
-                "other": "invalid_input"
+            'identifier_start': {
+                'alpha': 'identifier_continue',
+                'other': 'invalid_input'
             },
 
-            "identifier_continue": {
-                "alpha": "identifier_continue",
-                "digit": "identifier_continue",
-                "other": "invalid_input"
+            'identifier_continue': {
+                'alpha': 'identifier_continue',
+                'digit': 'identifier_continue',
+                'other': 'invalid_input'
             },
 
-            "integer_start": {
-                "digit": "integer_continue",
-                "other": "invalid_input"
+            'integer_start': {
+                'digit': 'integer_continue',
+                'other': 'invalid_input'
             },
 
-            "integer_continue": {
-                "digit": "integer_continue",
-                "decimal": "real_start",
-                "other": "invalid_input"
+            'integer_continue': {
+                'digit': 'integer_continue',
+                'decimal': 'real_start',
+                'other': 'invalid_input'
             },
 
-            "operator_start":  {
-                "all": "operator"
+            'operator_start':  {
+                'all': 'operator'
             },
 
-            "separator_start": {
-                "all": "separator"
+            'separator_start': {
+                'all': 'separator'
             },
 
-            "real_start": {
-                "digit": "real_continue",
-                "other": "invalid_input"
+            'real_start': {
+                'digit': 'real_continue',
+                'other': 'invalid_input'
             },
 
-            "real_continue": {
-                "digit" : "real_continue",
-                ".": "invalid_input",
-                "other" : "invalid_input"
+            'real_continue': {
+                'digit' : 'real_continue',
+                '.': 'invalid_input',
+                'other' : 'invalid_input'
 
             },
 
-            "space_start": {
-                "all": "space_start"
+            'space_start': {
+                'all': 'space_start'
             },
 
-            "invalid_input": {
-                "all": "invalid"
+            'invalid_input': {
+                'all': 'invalid'
             }
 
         }
 
         input_type = self.get_input_type(input_char)
-        #print ("Input type:", input_type)
+        #print ('Input type:', input_type)
 
         next_state_dictionary = transitions.get (current_state, {})
-        #print ("Next state dictionary", next_state_dictionary)
+        #print ('Next state dictionary', next_state_dictionary)
 
-        next_state = next_state_dictionary.get(input_type, "invalid")
-        #print ("Next state:", next_state)
+        next_state = next_state_dictionary.get(input_type, 'invalid')
+        #print ('Next state:', next_state)
 
         return next_state
 
@@ -161,36 +163,37 @@ class lexical:
     def get_input_type(self, input_char):
 
         special_char_dict = {
-            "=": "operator",
-            "+": "operator",
-            "-": "operator",
-            "*": "operator",
-            "/": "operator",
-            "<": "operator",
-            ">": "operator",
-            ";": "separator",
-            " ": "space",
-            "(": "separator",
-            ")": "separator",
-            '"': "separator",
-            ":": "separator"
+            '=': 'operator',
+            '+': 'operator',
+            '-': 'operator',
+            '*': 'operator',
+            '/': 'operator',
+            '<': 'operator',
+            '>': 'operator',
+            ';': 'separator',
+            ' ': 'space',
+            '(': 'separator',
+            ')': 'separator',
+            '"': 'separator', 
+            ':': 'separator',
+            ',': 'separator'
         }
 
         if input_char.isalpha() or input_char == '_':
-            return "alpha"
+            return 'alpha'
         
         if input_char.isdigit():
-            return "digit"
+            return 'digit'
         
         if input_char in special_char_dict:
             #print(f'aaaaaaa  {special_char_dict[input_char]}')
             return special_char_dict[input_char]
         
         if input_char == ' ':
-            return "space"
+            return 'space'
         
         if input_char == '.':
-            return "decimal"
+            return 'decimal'
         
         else:
-            return "other"
+            return 'other'

@@ -9,7 +9,7 @@ def main():
     #read file and put into an array without newlines
     with open ('input_scode.txt', 'r') as file:
         for line in file:
-            inputs_array = line.split(" ")
+            inputs_array = line.split(' ')
             inputs.extend(inputs_array)
         #file_data = [line.strip() for line in file.readlines()]
         #print(file_data)
@@ -21,8 +21,6 @@ def main():
             token_output = lexical_analyzer.lexer(input)
             #print (f'{token_output.type}, {token_output.lexume}')
             file.write(f'{token_output.type}, {token_output.lexume}\n')
-
-        
 
     return 0
 
