@@ -30,3 +30,27 @@ identifier, input_char
 separator, )
 separator, :
 ERROR, 
+
+keyword, return
+identifier, Token
+separator, (
+ERROR, '
+identifier, real
+ERROR, '
+separator, ,
+identifier, test
+separator, )
+ERROR, 
+
+keyword, if
+separator, (
+identifier, t
+operator, =
+identifier, j
+separator, )
+ERROR, 
+
+keyword, else
+separator, :
+ERROR, 
+

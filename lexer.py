@@ -14,7 +14,11 @@ class lexical:
             'while' : 'keyword',
             'class' : 'keyword',
             'for'  : 'keyword',
-            'self' : 'keyword'
+            'self' : 'keyword',
+            'elif' : 'keyword',
+            'return': 'keyword',
+            'if' : 'keyword',
+            'else': 'keyword'
             
         }
         #setting state at beginning
