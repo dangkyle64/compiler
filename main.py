@@ -11,7 +11,6 @@ def main():
         for line in file:
             inputs_array = line.split(' ')
             inputs.extend(inputs_array)
-        #file_data = [line.strip() for line in file.readlines()]
         #print(file_data)
 
     #loop through all testcases in lexical analyzer

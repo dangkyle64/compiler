@@ -1,6 +1,6 @@
-while ( t < upper ) s = 22.00 ; 
-file_data = for line in file_data 
-def next_state ( self , current_state , input_char ) : 
-return Token ( ' real ' , test ) 
-if ( t = j ) 
-else : 
+while ( t < upper ) s = 22.00 ;
+file_data = for line in file_data
+def next_state ( self , current_state , input_char ) :
+return Token ( ' real ' , test )
+if ( t = j )
+else :

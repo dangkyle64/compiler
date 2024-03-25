@@ -9,16 +9,12 @@ identifier, s
 operator, =
 real, 22.00
 separator, ;
-ERROR, 
-
 identifier, file_data
 operator, =
 keyword, for
 identifier, line
 identifier, in
 identifier, file_data
-ERROR, 
-
 identifier, def
 identifier, next_state
 separator, (
@@ -29,8 +25,6 @@ separator, ,
 identifier, input_char
 separator, )
 separator, :
-ERROR, 
-
 keyword, return
 identifier, Token
 separator, (
@@ -40,17 +34,11 @@ ERROR, '
 separator, ,
 identifier, test
 separator, )
-ERROR, 
-
 keyword, if
 separator, (
 identifier, t
 operator, =
 identifier, j
 separator, )
-ERROR, 
-
 keyword, else
 separator, :
-ERROR, 
-

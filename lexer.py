@@ -10,6 +10,8 @@ class lexical:
 
     #lexer function
     def lexer(self, input):
+
+        #store possible keywords for comparison
         keyword = {
             'while' : 'keyword',
             'class' : 'keyword',
@@ -29,6 +31,7 @@ class lexical:
 
         #convert to string if integer input is found
         test = str(test)
+        test = test.rstrip()
 
         #split the inputs into characters to be put into the lexer function
         for index in range (len(test)):
@@ -56,7 +59,7 @@ class lexical:
             #print ('next_state:', next_state_location)
 
             #print (test[index])
-
+                
         #when finishing moving through input and states, print results
             
         if ('identifier_continue' in state and test in keyword):
